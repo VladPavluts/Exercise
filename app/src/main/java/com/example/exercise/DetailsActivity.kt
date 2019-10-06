@@ -5,9 +5,16 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.exercise.ActorsList.Actor
+import com.example.exercise.ActorsList.ActorsAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+
+
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -31,6 +38,24 @@ class DetailsActivity : AppCompatActivity() {
         releaseDate.text=movie.releaseDate
         name.text=movie.title
         overview.text=movie.overview
+
+        //////////////////////////////////
+        //////////////////////////////////
+        //////////////////////////////////
+
+        val listHorizontal=findViewById<RecyclerView>(R.id.actorsList)
+        val list_of_actors: List<Actor> = listOf(
+        Actor("Tom Cruz",R.drawable.actor1),
+        Actor("Angelina G",R.drawable.actor2),
+        Actor("Tom Cruz",R.drawable.actor1),
+        Actor("Angelina G",R.drawable.actor2)
+        )
+        val actorsAdapter=ActorsAdapter(this,list_of_actors,{Actor -> Log.v("","EVENT")})
+        listHorizontal.adapter=actorsAdapter
+
+        val layoutManagerr = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        listHorizontal.layoutManager=layoutManagerr
+
     }
 
     private fun onTrailerMovie(url:String){
