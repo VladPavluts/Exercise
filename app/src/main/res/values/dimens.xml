@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_itemMovie_h">108dp</dimen>
+    <dimen name="image_w">110dp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="two_dp">2dp</dimen>
+    <dimen name="normalTextSize">16sp</dimen>
+</resources>
