@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         val movies=DataStorage.getMoviesList()
 
         val adapter = MoviesAdapter(this, movies) { position ->
-            val movie = movies[position]
-            val intent = DetailsActivity.createIntent(this, movie)
+           // val movie = movies[position]
+            val intent = DetailsActivity.createIntent(this,position)
             startActivity(intent)
         }
         list.adapter=adapter

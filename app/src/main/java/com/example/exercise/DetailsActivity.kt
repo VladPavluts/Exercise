@@ -2,74 +2,45 @@ package com.example.exercise
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.example.exercise.ActorsList.Actor
-import com.example.exercise.ActorsList.ActorsAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.example.exercise.DataStorage.getMoviesList
+import com.example.exercise.Fragment.MyFragment.Companion.newInstance
 
 
 class DetailsActivity : AppCompatActivity() {
+
+    private lateinit var mPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        val movie = intent?.getParcelableExtra<Movie>(ARGS_MOVIE)
-            ?: throw IllegalArgumentException("Missing movie argument")
-        val movieButton: Button = findViewById(R.id.movieButtonId)
-        movieButton.setOnClickListener{onTrailerMovie(movie.trailerUrl)}
+        mPager = findViewById(R.id.viewpager)
+        val position=intent.getIntExtra(KEYPOS,0)
 
-        val fonImage=findViewById<ImageView>(R.id.IVendgame_b)
-        val poster=findViewById<ImageView>(R.id.IVendgame_fon)
-        val releaseDate=findViewById<TextView>(R.id.IDrele)
-        val name=findViewById<TextView>(R.id.avenID)
-        val overview=findViewById<TextView>(R.id.overviewID)
 
-        fonImage.setImageResource(movie.backdropRes)
-        poster.setImageResource(movie.posterRes)
-        releaseDate.text=movie.releaseDate
-        name.text=movie.title
-        overview.text=movie.overview
-
-        //////////////////////////////////
-        //////////////////////////////////
-        //////////////////////////////////
-
-        val listHorizontal=findViewById<RecyclerView>(R.id.actorsList)
-        val list_of_actors: List<Actor> = listOf(
-        Actor("Tom Cruz",R.drawable.actor1),
-        Actor("Angelina G",R.drawable.actor2),
-        Actor("Tom Cruz",R.drawable.actor1),
-        Actor("Angelina G",R.drawable.actor2)
-        )
-        val actorsAdapter=ActorsAdapter(this,list_of_actors,{Actor -> Log.v("","EVENT")})
-        listHorizontal.adapter=actorsAdapter
-
-        val layoutManagerr = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        listHorizontal.layoutManager=layoutManagerr
-
-    }
-
-    private fun onTrailerMovie(url:String){
-        val intent= Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(intent)
-
+        val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        mPager.adapter = pagerAdapter
+        mPager.currentItem=position
     }
 
     companion object{
-        private const val ARGS_MOVIE="ARGS_MOVIE"
-        fun createIntent(context: Context, movie: Movie): Intent {
+        private const val KEYPOS="KEYPOS"
+        fun createIntent(context: Context,position: Int): Intent {
             val intent = Intent(context, DetailsActivity::class.java)
-            intent.putExtra(ARGS_MOVIE, movie)
+            intent.putExtra(KEYPOS,position)
             return intent
         }
+    }
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+        override fun getCount(): Int = getMoviesList().size
+
+        override fun getItem(position: Int): Fragment = newInstance(getMoviesList()[position])
+
     }
 }
