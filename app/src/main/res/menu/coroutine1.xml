@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/coroutine11"
+        app:showAsAction="never"
+        android:title="Coroutine"/>
+    <item
+        android:id="@+id/thread22"
+        app:showAsAction="never"
+        android:title="Thread"/>
+</menu>

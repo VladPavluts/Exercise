@@ -2,4 +2,6 @@
     <string name="app_name">Movies</string>
     <string name="movie_trailer">Movie trailer</string>
     <string name="overview">Overview</string>
+    <string name="done">Done!</string>
+    <string name="cact">Coroutine Activity</string>
 </resources>
