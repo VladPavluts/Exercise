@@ -2,9 +2,12 @@ package com.example.exercise.threads
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProviders
 import com.example.exercise.R
+import com.example.exercise.ViewModel.CoroutineViewModel
 
 class CoroutineActivity : AppCompatActivity() {
+
 
     companion object{
         const val KEY="KEY"
@@ -13,6 +16,7 @@ class CoroutineActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutine)
+
 
         val text=intent.getStringExtra(KEY)
 

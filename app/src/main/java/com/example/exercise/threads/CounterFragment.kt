@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.exercise.R
+import com.example.exercise.ViewModel.CoroutineViewModel
+import kotlinx.android.synthetic.main.counterfragment.*
 
-class CounterFragment :Fragment(),TaskEventListener.Lifecycle{
+class CounterFragment :Fragment(){
+    private  lateinit var viewModel: CoroutineViewModel
     private lateinit var taskCreateButton: Button
     private lateinit var taskStartButton: Button
     private lateinit var taskCancelButton: Button
@@ -33,11 +38,12 @@ class CounterFragment :Fragment(),TaskEventListener.Lifecycle{
     ): View? {
 
         val view= inflater.inflate(R.layout.counterfragment,container,false)
-        if(arguments?.getString(KEYS)==CoroutineActivity.KEY_COROUTINE)
+      /*  if(arguments?.getString(KEYS)==CoroutineActivity.KEY_COROUTINE)
             task= CoroutineTask(this)
         if(arguments?.getString(KEYS)==ThreadsActivity.KEY_THREAD)
-            task= ThreadTask(this)
+            task= ThreadTask(this)*/
 
+        viewModel= ViewModelProviders.of(this).get(CoroutineViewModel::class.java)
 
         taskCreateButton = view.findViewById(R.id.button)
         taskStartButton = view.findViewById(R.id.button2)
@@ -45,15 +51,19 @@ class CounterFragment :Fragment(),TaskEventListener.Lifecycle{
 
         contentText = view.findViewById(R.id.textView)
 
-        taskCreateButton.setOnClickListener { task?.createTask() }
-        taskStartButton.setOnClickListener { task?.startTask() }
-        taskCancelButton.setOnClickListener { task?.cancelTask() }
+        taskCreateButton.setOnClickListener { viewModel.onCreateTask() }
+        taskStartButton.setOnClickListener { viewModel.onStartTask() }
+        taskCancelButton.setOnClickListener { viewModel.onCancelTask() }
         contentText.text=arguments?.getString(KEYS) ?: throw  IllegalArgumentException()
+
+        viewModel.contentsText.observe(this, Observer { string ->
+            textView.text = string
+        })
 
         return view
     }
 
-    override fun onPostExecute() {
+    /*override fun onPostExecute() {
         contentText.text=getString(R.string.done)
     }
 
@@ -63,5 +73,5 @@ class CounterFragment :Fragment(),TaskEventListener.Lifecycle{
 
     override fun onProgressUpdate(progress: Int) {
         contentText.text="$progress..."
-    }
+    }*/
 }
