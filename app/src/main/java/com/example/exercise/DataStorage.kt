@@ -6,7 +6,8 @@ object DataStorage {
 
     fun getMoviesList(): List<Movie> {
         return listOf(
-            Movie(
+            Movie(0,"hi","hi","hi","hi","hi")
+           /* Movie(
                 "Jurassic World - Fallen Kingdom",
                 drawable.jurassic_world_fallen_kingdom,
                 drawable.jurassic_world_fallen_kingdom_big,
@@ -14,6 +15,7 @@ object DataStorage {
                 "June 22, 2018",
                 "https://youtu.be/vn9mMeWcgoM"
             ),
+
 
             Movie(
                 "The Meg",
@@ -85,7 +87,7 @@ object DataStorage {
                 "Light years from Earth, 26 years after being abducted, Peter Quill finds himself the prime target of a manhunt after discovering an orb wanted by Ronan the Accuser",
                 "August 1, 2014",
                 "https://youtu.be/d96cjJhvlMA"
-            )
+            )*/
         )
     }
 }

@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 
-class MoviesAdapter(context: Context,var movies: List<Movie>,private val clickListener: (position: Int) -> Unit) :
+class MoviesAdapter(context: Context,var movies: List<Movie>,private val clickListener: (movies: List<Movie>, position: Int) -> Unit) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private  val inflater: LayoutInflater= LayoutInflater.from(context)
@@ -18,7 +19,7 @@ class MoviesAdapter(context: Context,var movies: List<Movie>,private val clickLi
     fun getItem(position: Int)=movies[position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(inflater.inflate(R.layout.item_movie,parent,false),clickListener)
+        return ViewHolder(inflater.inflate(R.layout.item_movie,parent,false)){ position -> clickListener(movies, position) }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,7 +41,7 @@ class MoviesAdapter(context: Context,var movies: List<Movie>,private val clickLi
         }
 
         fun bind(movie: Movie){
-            poster.setImageResource(movie.posterRes)
+            poster.load(movie.posterUrl)
             title.text=movie.title
             overview.text=movie.overview
         }

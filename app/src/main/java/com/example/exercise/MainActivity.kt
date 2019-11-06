@@ -5,28 +5,59 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.ProgressBar
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.exercise.Mapper.Dependencies.Dependency
 import com.example.exercise.threads.CoroutineActivity
 import com.example.exercise.threads.ThreadsActivity
 
 class MainActivity : AppCompatActivity() {
 
+    var counter=1
 
-
+    private lateinit var viewModel: MoviesViewModel
+    private  lateinit var adapter: MoviesAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val list=findViewById<RecyclerView>(R.id.moviesList)
-        val movies=DataStorage.getMoviesList()
 
-        val adapter = MoviesAdapter(this, movies) { position ->
-            val intent = DetailsActivity.createIntent(this,position)
+        viewModel = ViewModelProviders.of(this,
+            MoviesViewModelFactory(Dependency.moviesRepo)).get(MoviesViewModel::class.java)
+
+        viewModel.launching(counter)
+
+        findViewById<Button>(R.id.ButtonForShowMore).setOnClickListener {
+            counter++
+            viewModel.launching(counter)
+
+        }
+
+        viewModel.movies.observe(this, Observer { movies ->
+            adapter.movies = movies
+            adapter.notifyDataSetChanged()
+        })
+        val progressBar = findViewById<ProgressBar>(R.id.moviesProgressBar)
+        viewModel.isProgressBarVisible.observe(this, Observer { isVisible ->
+            progressBar.isVisible = isVisible
+        })
+        adapter = MoviesAdapter(this, emptyList()) { movies, position ->
+            val intent = DetailsActivity.createIntent(this,position,movies)
             startActivity(intent)
         }
+
         list.adapter=adapter
-        list.layoutManager= LinearLayoutManager(this)
+        list.layoutManager = LinearLayoutManager(this)
+
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.coroutine1, menu)

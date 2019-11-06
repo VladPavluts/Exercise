@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.exercise.DataStorage.getMoviesList
 import com.example.exercise.Fragment.MyFragment.Companion.newInstance
 
 
@@ -22,25 +21,24 @@ class DetailsActivity : AppCompatActivity() {
 
         mPager = findViewById(R.id.viewpager)
         val position=intent.getIntExtra(KEYPOS,0)
-
-
-        val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager)
+        val movies=intent.getParcelableArrayListExtra<Movie>(KEY_MOVIES)
+        val pagerAdapter = ScreenSlidePagerAdapter(supportFragmentManager,movies)
         mPager.adapter = pagerAdapter
         mPager.currentItem=position
     }
 
     companion object{
         private const val KEYPOS="KEYPOS"
-        fun createIntent(context: Context,position: Int): Intent {
+        private const val KEY_MOVIES="KEY_MOVIES"
+        fun createIntent(context: Context,position: Int,movies: List<Movie>): Intent {
             val intent = Intent(context, DetailsActivity::class.java)
             intent.putExtra(KEYPOS,position)
+            intent.putExtra(KEY_MOVIES,ArrayList(movies))
             return intent
         }
     }
-    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        override fun getCount(): Int = getMoviesList().size
-
-        override fun getItem(position: Int): Fragment = newInstance(getMoviesList()[position])
-
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager,val movies: List<Movie>) : FragmentStatePagerAdapter(fm) {
+        override fun getCount(): Int = movies.size
+        override fun getItem(position: Int): Fragment = newInstance(movies[position],movies)
     }
 }
