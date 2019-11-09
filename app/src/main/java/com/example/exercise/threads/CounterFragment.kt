@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.exercise.R
-import com.example.exercise.ViewModel.CoroutineViewModel
+import com.example.exercise.threads.ViewModel.CoroutineViewModel
 import kotlinx.android.synthetic.main.counterfragment.*
 
 class CounterFragment :Fragment(){

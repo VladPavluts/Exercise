@@ -1,12 +1,12 @@
-package com.example.exercise
+package com.example.exercise.data
 
-import com.example.exercise.R.*
+import com.example.exercise.data.Movie
 
 object DataStorage {
 
     fun getMoviesList(): List<Movie> {
         return listOf(
-            Movie(0,"hi","hi","hi","hi","hi")
+            Movie(0, "hi", "hi", "hi", "hi", "hi", 0.0)
            /* Movie(
                 "Jurassic World - Fallen Kingdom",
                 drawable.jurassic_world_fallen_kingdom,

@@ -1,7 +1,8 @@
-package com.example.exercise
+package com.example.exercise.main
 
 import androidx.lifecycle.*
 import com.example.exercise.Mapper.MoviesRepo
+import com.example.exercise.data.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,7 +16,7 @@ class MoviesViewModel(val moviesRepo: MoviesRepo) : ViewModel() {
         viewModelScope.launch{
             try {
                 isProgressBarVisibleMutableLiveData.value = true
-                val movies = withContext(Dispatchers.IO) { moviesRepo.getMovies(count) }
+                val movies = withContext(Dispatchers.Default) { moviesRepo.getMovies(count) }
                 moviesLiveData.value = movies
             }
             catch (error: Throwable){

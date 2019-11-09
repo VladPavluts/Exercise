@@ -1,4 +1,4 @@
-package com.example.exercise.Fragment
+package com.example.exercise.details
 
 import android.content.Intent
 import android.net.Uri
@@ -13,16 +13,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import coil.api.load
-import com.example.exercise.DetailsViewModel
 import com.example.exercise.Mapper.Dependencies.Dependency
-import com.example.exercise.Movie
+import com.example.exercise.data.Movie
 import com.example.exercise.R
 
 class MyFragment: Fragment() {
     companion object {
         private val KEY="KEY"
         private val KEY_MOVIES="KEY_MOVIES"
-        fun newInstance(movie: Movie,movies: List<Movie>): MyFragment {
+        fun newInstance(movie: Movie, movies: List<Movie>): MyFragment {
             val f = MyFragment()
             val args = Bundle()
             args.putParcelable(KEY,movie)

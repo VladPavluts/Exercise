@@ -1,4 +1,4 @@
-package com.example.exercise
+package com.example.exercise.details
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.exercise.Fragment.MyFragment.Companion.newInstance
+import com.example.exercise.R
+import com.example.exercise.details.MyFragment.Companion.newInstance
+import com.example.exercise.data.Movie
 
 
 class DetailsActivity : AppCompatActivity() {

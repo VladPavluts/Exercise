@@ -1,7 +1,8 @@
-package com.example.exercise
+package com.example.exercise.details
 
 import androidx.lifecycle.*
 import com.example.exercise.Mapper.MoviesRepo
+import com.example.exercise.data.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

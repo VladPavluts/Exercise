@@ -1,4 +1,4 @@
-package com.example.exercise
+package com.example.exercise.main
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.example.exercise.R
+import com.example.exercise.data.Movie
 
-class MoviesAdapter(context: Context,var movies: List<Movie>,private val clickListener: (movies: List<Movie>, position: Int) -> Unit) :
+class MoviesAdapter(context: Context, var movies: List<Movie>, private val clickListener: (movies: List<Movie>, position: Int) -> Unit) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private  val inflater: LayoutInflater= LayoutInflater.from(context)
@@ -19,7 +21,13 @@ class MoviesAdapter(context: Context,var movies: List<Movie>,private val clickLi
     fun getItem(position: Int)=movies[position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(inflater.inflate(R.layout.item_movie,parent,false)){ position -> clickListener(movies, position) }
+        return ViewHolder(
+            inflater.inflate(
+                R.layout.item_movie,
+                parent,
+                false
+            )
+        ) { position -> clickListener(movies, position) }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

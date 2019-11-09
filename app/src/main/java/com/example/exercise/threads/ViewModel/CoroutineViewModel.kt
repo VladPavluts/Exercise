@@ -1,8 +1,7 @@
-package com.example.exercise.ViewModel
+package com.example.exercise.threads.ViewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.exercise.R
 import com.example.exercise.threads.CoroutineTask
 import com.example.exercise.threads.TaskEventListener
 

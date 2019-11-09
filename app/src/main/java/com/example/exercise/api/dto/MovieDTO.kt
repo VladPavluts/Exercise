@@ -16,5 +16,7 @@ data class MovieDto(
     @Json(name = "poster_path")
     val posterPath: String,
     @Json(name = "backdrop_path")
-    val backdropPath: String
+    val backdropPath: String,
+    @Json(name = "popularity")
+    val popularity: Double
 )

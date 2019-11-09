@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".DetailsActivity"
+    tools:context=".details.DetailsActivity"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
         <RelativeLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".DetailsActivity">
+            tools:context=".details.DetailsActivity">
 
             <ImageView
                 android:id="@+id/IVendgame_b"

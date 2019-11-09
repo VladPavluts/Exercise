@@ -1,6 +1,6 @@
 package com.example.exercise.Mapper
 
-import com.example.exercise.Movie
+import com.example.exercise.data.Movie
 import com.example.exercise.api.dto.MovieDto
 import com.example.exercise.api.dto.MoviesDto
 import com.example.exercise.api.dto.VideoDto
@@ -22,7 +22,8 @@ class TmdbMapper {
             posterUrl = POSTER_BASE_URL + movieDto.posterPath,
             backdropUrl = BACKDROP_BASE_URL + movieDto.backdropPath,
             overview = movieDto.overview,
-            releaseDate = movieDto.releaseDate
+            releaseDate = movieDto.releaseDate,
+            popularity = movieDto.popularity
         )
     }
 

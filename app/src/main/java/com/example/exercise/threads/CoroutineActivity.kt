@@ -2,9 +2,7 @@ package com.example.exercise.threads
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
 import com.example.exercise.R
-import com.example.exercise.ViewModel.CoroutineViewModel
 
 class CoroutineActivity : AppCompatActivity() {
 
