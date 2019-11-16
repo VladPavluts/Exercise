@@ -8,6 +8,7 @@ import com.example.exercise.Mapper.MoviesRepo
 import com.example.exercise.Mapper.TmdbMapper
 import com.example.exercise.cache.MoviesCache
 import com.example.exercise.cache.SharedPreferencesApi
+import com.example.exercise.cache.SharedPreferencesImpl
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
@@ -36,7 +37,9 @@ object Dependency {
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
     private fun createMoviesRepo(): MoviesRepo{
-        return MoviesRepo(TmdbMapper(), retrofit.create(), MoviesCache(db.movieDao(),db.videoDao()) )
+        return MoviesRepo(TmdbMapper(), retrofit.create(), MoviesCache(db.movieDao(),db.videoDao(),
+            SharedPreferencesImpl(App.appContext!!)
+        ) )
     }
 
 
