@@ -16,7 +16,7 @@ class MoviesViewModel(val moviesRepo: MoviesRepo) : ViewModel() {
         viewModelScope.launch{
             try {
                 isProgressBarVisibleMutableLiveData.value = true
-                val movies = withContext(Dispatchers.Default) { moviesRepo.getMovies(count) }
+                val movies = withContext(Dispatchers.IO) { moviesRepo.getMovies(count) }
                 moviesLiveData.value = movies
             }
             catch (error: Throwable){

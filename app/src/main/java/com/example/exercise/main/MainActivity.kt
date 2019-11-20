@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.exercise.Mapper.Dependencies.Dependency
 import com.example.exercise.R
 import com.example.exercise.details.DetailsActivity
+import com.example.exercise.service.BGServiceActivity
 import com.example.exercise.threads.CoroutineActivity
 import com.example.exercise.threads.ThreadsActivity
 
@@ -65,20 +66,25 @@ class MainActivity : AppCompatActivity() {
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem):Boolean{
-        if(item.itemId== R.id.coroutine11){
+        if(item.itemId == R.id.coroutine11){
             val intent=Intent(this,CoroutineActivity::class.java)
             intent.putExtra(CoroutineActivity.KEY,CoroutineActivity.KEY_COROUTINE)
             startActivity(intent)
             return true
         }
-        if(item.itemId== R.id.thread22){
+        if(item.itemId == R.id.thread22){
             val intent=Intent(this,ThreadsActivity::class.java)
             intent.putExtra(ThreadsActivity.KEY,ThreadsActivity.KEY_THREAD)
             startActivity(intent)
             return true
         }
+        if(item.itemId == R.id.BGActivity){
+            val intent=Intent(this,BGServiceActivity::class.java)
+            intent.putExtra(BGServiceActivity.KEY,BGServiceActivity.KEY_BG)
+            startActivity(intent)
+            return true
+        }
         return true
-
 
     }
 
